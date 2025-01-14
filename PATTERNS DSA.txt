@@ -1,0 +1,14 @@
+PATTERNS DSA:
+
+Array
+Majority Algorithms : Moore's Voting Algorithm
+SubArray Questions : Prefix Sum
+Sorted Arrays : Binary Search (Probably)
+Max of Min / Min of Max : Binary Search
+Distinct Elements : Set 
+-ve number sliding window : monotonic queue sliding window 
+subarrays (most) - sliding window 
+Circular Traversal - 2n-1 times travel
+O(1) Design - DLL + Hash Map
+2 Pass Algo - Arrays
+Permutations - Bitmask
