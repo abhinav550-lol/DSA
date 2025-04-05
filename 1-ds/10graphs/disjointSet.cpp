@@ -1,47 +1,83 @@
-// disjoint set -> union , findParent       --------- Intially sare nodes are parent of them self
 #include <iostream>
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
- 
 
 class DisjointSet{
-    public:
-    vector<int> parent;
-    vector<int> rank;
-    int n;
+	vector<int> rank;
+	vector<int> parent;
+	vector<int> size;
+	int n;
+	
+	public:
+	DisjointSet(int size) : n(size){
+		for(int i = 0 ; i < size ; i++){
+			rank.push_back(0);
+			parent.push_back(i);
+		}
+	}
 
-    DisjointSet(int nodes):n(nodes){
-        parent.resize(n);
-        rank.resize(n, 0);
-        for (int i = 0; i < n; ++i) {
-            parent[i] = i;
-        }
-    }
+	void UnionByRank(int u , int v){
+		int parentU = findParent(u);
+		int parentV = findParent(v);
+		if(parentU == parentV) return ;
+		else{
+			if(rank[parentU] > rank[parentV]){
+				parent[parentV] = parentU;
+			}else{
+				if(rank[parentU] == rank[parentV]) rank[parentV]++;
+				parent[parentU] = parentV;
+			}
+		}
+	}
 
-    int findParent(int s){
-        if(parent[s] == s){
-            return s;
-        }
-        parent[s] = findParent(parent[s]); //Path Compression
-        return parent[s];
-    }
-    void unionSet(int x , int y){
-        int u = findParent(x);
-        int v = findParent(y);
-        if(rank[v] > rank[u]){
-            parent[u] = v;
-        }else if(rank[u] > rank[v]){
-            parent[v] = u;
-        }else{
-            parent[v] = u;
-            rank[u]++; // Rank
-        }
-    }
+	void UnionBySize(int u , int v){
+		int parentU = findParent(u);
+		int parentV = findParent(v);
+		if(parentU == parentV) return ;
+		else{
+			if(size[parentU] > size[parentV]){
+				size[parentU] += (size[parentV]);
+				parent[parentV] = parentU;
+			}else{
+				size[parentV] += (size[parentU]);
+				parent[parentU] = parentV;
+			}
+		}
+	}
+	
+	int findParent(int u){
+		if(parent[u] != u){
+			parent[u] = findParent(parent[u]);
+		}
+		return parent[u];
+	}
+
 };
 
 
-int main(){
-   DisjointSet d(5);
+int main() {
+	// Your code here
+	DisjointSet ds(5);
+	vector<pair<int , int>> edges = {{0 , 1} , {1 , 2} , {3 , 4} , {2 , 3}};
+	for(pair<int , int> edge : edges){
+		ds.UnionByRank(edge.first , edge.second);
+		//check if 2 and 3 are in same component
+		if(ds.findParent(2) == ds.findParent(3)){
+			cout << "YES" << endl;
+		}else{
+			cout << "NO" << endl;
+		}
+	}
 
-  return 0;
+	DisjointSet ds2(5);
+	for(pair<int , int> edge : edges){
+		ds2.UnionBySize(edge.first , edge.second);
+		//check if 2 and 3 are in same component
+		if(ds2.findParent(2) == ds2.findParent(3)){
+			cout << "YES" << endl;
+		}else{
+			cout << "NO" << endl;
+		}
+	}
+	return 0;
 }

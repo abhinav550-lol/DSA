@@ -1,8 +1,11 @@
 #include <iostream>
+#include <fstream>
 using namespace std;
 
+// Academic Suggestion 
 int main() {
-    // Your code here
-    cout << -8 %4;
-    return 0;
-}r
+	while(true){
+
+	}
+	return 0;
+}

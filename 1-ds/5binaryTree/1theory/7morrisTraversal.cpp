@@ -1,4 +1,4 @@
-#include "C:\Users\Abhinav\Desktop\VS Code Projects\C C++ DSA\3.DSA in C++ Advanced\1-ds\binaryTree\1theory\0import.cpp"
+#include "1-ds/5binaryTree/1theory/0import.cpp"
 
 void morrisTraversal(Node* root){
     Node* curr = root ;
@@ -17,7 +17,7 @@ void morrisTraversal(Node* root){
            }else{
             prev->right = NULL;
             cout << curr -> data << ' ';
-            curr = curr -> right;
+            curr = curr -> right;	
            } 
         }
     }

@@ -1,5 +1,4 @@
 PATTERNS DSA:
-
 Array
 Majority Algorithms : Moore's Voting Algorithm
 SubArray Questions : Prefix Sum
@@ -12,3 +11,7 @@ Circular Traversal - 2n-1 times travel
 O(1) Design - DLL + Hash Map
 2 Pass Algo - Arrays
 Permutations - Bitmask
+Order with graph - Topo Sort 
+Reordering and common array limits with some order - sorting
+meet in the middle -> subset dp
+when answer lies depends on prev index - print lis tracker

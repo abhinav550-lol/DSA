@@ -84,7 +84,7 @@ void segementedSieve(int l  ,int r){
 
 
 
-int main() {
+int main() {r
 	//cout << countPrimes(7);
 	 segementedSieve(110 , 127);
 	return 0;
