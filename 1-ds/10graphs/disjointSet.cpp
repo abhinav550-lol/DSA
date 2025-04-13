@@ -2,21 +2,22 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-class DisjointSet{
+class DSU{
 	vector<int> rank;
 	vector<int> parent;
 	vector<int> size;
 	int n;
 	
 	public:
-	DisjointSet(int size) : n(size){
-		for(int i = 0 ; i < size ; i++){
+	DSU(int c) : n(c){
+		for(int i = 0 ; i < c ; i++){
 			rank.push_back(0);
+			size.push_back(1);
 			parent.push_back(i);
 		}
 	}
 
-	void UnionByRank(int u , int v){
+	void unionByRank(int u , int v){
 		int parentU = findParent(u);
 		int parentV = findParent(v);
 		if(parentU == parentV) return ;
@@ -30,7 +31,7 @@ class DisjointSet{
 		}
 	}
 
-	void UnionBySize(int u , int v){
+	void unionBySize(int u , int v){
 		int parentU = findParent(u);
 		int parentV = findParent(v);
 		if(parentU == parentV) return ;
@@ -57,10 +58,10 @@ class DisjointSet{
 
 int main() {
 	// Your code here
-	DisjointSet ds(5);
+	DSU ds(5);
 	vector<pair<int , int>> edges = {{0 , 1} , {1 , 2} , {3 , 4} , {2 , 3}};
 	for(pair<int , int> edge : edges){
-		ds.UnionByRank(edge.first , edge.second);
+		ds.unionByRank(edge.first , edge.second);
 		//check if 2 and 3 are in same component
 		if(ds.findParent(2) == ds.findParent(3)){
 			cout << "YES" << endl;
@@ -69,9 +70,9 @@ int main() {
 		}
 	}
 
-	DisjointSet ds2(5);
+	DSU ds2(5);
 	for(pair<int , int> edge : edges){
-		ds2.UnionBySize(edge.first , edge.second);
+		ds2.unionBySize(edge.first , edge.second);
 		//check if 2 and 3 are in same component
 		if(ds2.findParent(2) == ds2.findParent(3)){
 			cout << "YES" << endl;
